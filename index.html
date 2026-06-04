@@ -5,23 +5,22 @@
 </head>
 <body style="text-align: center; padding-top: 50px; font-family: sans-serif;">
     <h2>Membership Payment</h2>
-    <p>Bhai, ₹2 pay karne ke liye niche button dabayein:</p>
+    <p>Bhai, pay karne ke liye button dabayein:</p>
     
     <button id="payBtn" style="padding: 15px 30px; font-size: 18px; background: #28a745; color: white; border: none; border-radius: 10px;">
-        Pay ₹2 via UPI
+        Pay ₹2 via UPI App
     </button>
 
     <script>
-        // URL se ?ref=... wali value nikalna
         const urlParams = new URLSearchParams(window.location.search);
-        const refId = urlParams.get('ref') || "MBR_TEST"; // Agar ID nahi mili toh MBR_TEST
+        const refId = urlParams.get('ref') || "MBR_TEST";
 
         document.getElementById('payBtn').onclick = function() {
-            // UPI Intent link (ye Android apps ke liye best hai)
-            const url = "upi://pay?pa=abharat298-2@oksbi&pn=Bharat&am=2&cu=INR&tn=" + refId;
+            // Hum yahan 'intent' scheme ka use kar rahe hain
+            const intentUrl = "intent://pay?pa=abharat298-2@oksbi&pn=Bharat&am=2&cu=INR&tn=" + refId + "#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;end;";
             
-            // Direct redirect try karo
-            window.location.href = url;
+            // Telegram Mini App mein ye intent zyada stable hota hai
+            window.location.href = intentUrl;
         };
     </script>
 </body>
