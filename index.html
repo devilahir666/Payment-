@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html>
-<body>
-    <h2>Payment for Premium</h2>
-    <p>Bharat bhai, niche button dabao:</p>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body style="text-align: center; padding: 20px;">
+    <h2>Payment Window</h2>
+    <p>Niche click karke apna UPI app chunein:</p>
     
-    <button onclick="pay('upi://pay?pa=abharat298-2@oksbi&pn=Bharat&am=2&cu=INR&tn=MBR12345')">
-        Pay via UPI App
+    <button id="payBtn" style="padding: 15px; font-size: 16px; background: #28a745; color: white; border: none; border-radius: 5px;">
+        Pay ₹2 via UPI App
     </button>
 
     <script>
-        function pay(url) {
-            window.location.href = url;
-        }
+        document.getElementById('payBtn').onclick = function() {
+            // Android ke liye intent scheme ka use karenge
+            const upiUrl = "upi://pay?pa=abharat298-2@oksbi&pn=Bharat&am=2&cu=INR&tn=MBR_PAYMENT";
+            const intentUrl = "intent://pay?pa=abharat298-2@oksbi&pn=Bharat&am=2&cu=INR&tn=MBR_PAYMENT#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;end;";
+            
+            // Sabse pehle intent try karega, agar fail hua toh window.location fallback
+            window.location.href = upiUrl;
+        };
     </script>
 </body>
 </html>
