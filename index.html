@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h2>Payment for Premium</h2>
+    <p>Bharat bhai, niche button dabao:</p>
+    
+    <button onclick="pay('upi://pay?pa=abharat298-2@oksbi&pn=Bharat&am=2&cu=INR&tn=MBR12345')">
+        Pay via UPI App
+    </button>
+
+    <script>
+        function pay(url) {
+            window.location.href = url;
+        }
+    </script>
+</body>
+</html>
