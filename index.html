@@ -4,24 +4,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body style="text-align: center; padding-top: 50px; font-family: sans-serif;">
-    <h2>Membership Payment</h2>
-    <p>Bhai, pay karne ke liye button dabayein:</p>
+    <h2>Payment Window</h2>
+    <p>Bhai, security ki wajah se app yahan nahi khulega.</p>
     
-    <button id="payBtn" style="padding: 15px 30px; font-size: 18px; background: #28a745; color: white; border: none; border-radius: 10px;">
-        Pay ₹2 via UPI App
-    </button>
+    <!-- Ye button direct UPI link trigger karega, agar Telegram block karega toh user ko error ke bajaye click karne ko bolega -->
+    <a id="payLink" href="#" style="padding: 15px 30px; font-size: 18px; background: #28a745; color: white; text-decoration: none; border-radius: 10px; display: inline-block;">
+        Click here to Pay ₹2
+    </a>
 
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         const refId = urlParams.get('ref') || "MBR_TEST";
-
-        document.getElementById('payBtn').onclick = function() {
-            // Hum yahan 'intent' scheme ka use kar rahe hain
-            const intentUrl = "intent://pay?pa=abharat298-2@oksbi&pn=Bharat&am=2&cu=INR&tn=" + refId + "#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;end;";
-            
-            // Telegram Mini App mein ye intent zyada stable hota hai
-            window.location.href = intentUrl;
-        };
+        
+        // UPI Link banana
+        const upiLink = "upi://pay?pa=abharat298-2@oksbi&pn=Bharat&am=2&cu=INR&tn=" + refId;
+        
+        // Link set karna
+        document.getElementById('payLink').href = upiLink;
     </script>
 </body>
 </html>
