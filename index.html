@@ -1,25 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body style="text-align: center; padding: 20px;">
+<body style="text-align: center; padding-top: 50px;">
     <h2>Payment Window</h2>
-    <p>Niche click karke apna UPI app chunein:</p>
+    <p>Agar app open nahi hua, toh niche button dabayein:</p>
     
-    <button id="payBtn" style="padding: 15px; font-size: 16px; background: #28a745; color: white; border: none; border-radius: 5px;">
-        Pay ₹2 via UPI App
+    <button onclick="pay()" style="padding: 15px 30px; font-size: 18px; background: #007bff; color: white; border: none; border-radius: 10px;">
+        Pay ₹2 via UPI
     </button>
 
     <script>
-        document.getElementById('payBtn').onclick = function() {
-            // Android ke liye intent scheme ka use karenge
-            const upiUrl = "upi://pay?pa=abharat298-2@oksbi&pn=Bharat&am=2&cu=INR&tn=MBR_PAYMENT";
-            const intentUrl = "intent://pay?pa=abharat298-2@oksbi&pn=Bharat&am=2&cu=INR&tn=MBR_PAYMENT#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;end;";
-            
-            // Sabse pehle intent try karega, agar fail hua toh window.location fallback
-            window.location.href = upiUrl;
-        };
+        function pay() {
+            var url = "upi://pay?pa=abharat298-2@oksbi&pn=Bharat&am=2&cu=INR&tn=MBR_PAYMENT";
+            // '_blank' open karne se shayad external app trigger ho jaye
+            window.open(url, '_blank');
+        }
     </script>
 </body>
 </html>
