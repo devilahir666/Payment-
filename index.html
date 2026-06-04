@@ -1,19 +1,28 @@
 <!DOCTYPE html>
 <html>
-<body style="text-align: center; padding-top: 50px;">
-    <h2>Payment Window</h2>
-    <p>Agar app open nahi hua, toh niche button dabayein:</p>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body style="text-align: center; padding-top: 50px; font-family: sans-serif;">
+    <h2>Membership Payment</h2>
+    <p>Bhai, ₹2 pay karne ke liye niche button dabayein:</p>
     
-    <button onclick="pay()" style="padding: 15px 30px; font-size: 18px; background: #007bff; color: white; border: none; border-radius: 10px;">
+    <button id="payBtn" style="padding: 15px 30px; font-size: 18px; background: #28a745; color: white; border: none; border-radius: 10px;">
         Pay ₹2 via UPI
     </button>
 
     <script>
-        function pay() {
-            var url = "upi://pay?pa=abharat298-2@oksbi&pn=Bharat&am=2&cu=INR&tn=MBR_PAYMENT";
-            // '_blank' open karne se shayad external app trigger ho jaye
-            window.open(url, '_blank');
-        }
+        // URL se ?ref=... wali value nikalna
+        const urlParams = new URLSearchParams(window.location.search);
+        const refId = urlParams.get('ref') || "MBR_TEST"; // Agar ID nahi mili toh MBR_TEST
+
+        document.getElementById('payBtn').onclick = function() {
+            // UPI Intent link (ye Android apps ke liye best hai)
+            const url = "upi://pay?pa=abharat298-2@oksbi&pn=Bharat&am=2&cu=INR&tn=" + refId;
+            
+            // Direct redirect try karo
+            window.location.href = url;
+        };
     </script>
 </body>
 </html>
